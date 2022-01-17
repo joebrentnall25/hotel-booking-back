@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.sql.Date;
 import java.sql.Timestamp;
 
 @Entity
@@ -14,14 +15,17 @@ public class User {
     private String username;
     private String email;
     private String password;
-    private Timestamp dateCreated;
+    private Timestamp dateCreated = new Timestamp(System.currentTimeMillis());
+
+    public User() {
+
+    }
 
     public User(int id, String username, String email, String password) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
-        this.dateCreated = new Timestamp(dateCreated.getTime());
     }
 
     public int getId() {
