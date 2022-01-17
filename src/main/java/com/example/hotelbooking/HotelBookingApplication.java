@@ -3,7 +3,7 @@ package com.example.hotelbooking;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
+@SpringBootApplication()
 public class HotelBookingApplication {
 
 	public static void main(String[] args) {
