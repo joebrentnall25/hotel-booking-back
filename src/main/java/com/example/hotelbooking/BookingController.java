@@ -14,6 +14,9 @@ public class BookingController {
     @Autowired
     RoomsRepository roomsRepository;
 
+    @Autowired
+    BookingRepository bookingRepository;
+
     // User Endpoints
 
     // Get Requests
@@ -67,5 +70,33 @@ public class BookingController {
     public ResponseEntity<String> deleteRoomById(@PathVariable String id){
         roomsRepository.deleteRoomByid(Integer.parseInt(id));
         return ResponseEntity.status(HttpStatus.OK).body("Room with id " + id + " deleted.");
+    }
+
+
+    // Booking Endpoints
+
+    // Get Requests
+    @GetMapping("/bookings")
+    public ResponseEntity getBookings(){
+        return ResponseEntity.status(HttpStatus.OK).body(bookingRepository.findAll());
+    }
+
+    @GetMapping("/bookings/{id}")
+    public ResponseEntity getBookingById(@PathVariable String id){
+        return ResponseEntity.status(HttpStatus.OK).body(bookingRepository.findBookingByid(Integer.parseInt(id)));
+    }
+
+    // Post Request
+    @PostMapping("/bookings")
+    public ResponseEntity<String> createBooking(@RequestBody Booking booking){
+        bookingRepository.save(booking);
+        return ResponseEntity.status(HttpStatus.CREATED).body("RoomId Booked: " + booking.getRoomId() + ", Booked for user with id: "+booking.getUserId());
+    }
+
+    // Delete Request
+    @DeleteMapping("/bookings/{id}")
+    public ResponseEntity<String> deleteBookingById(@PathVariable String id){
+        bookingRepository.deleteBookingByid(Integer.parseInt(id));
+        return ResponseEntity.status(HttpStatus.OK).body("Booking with id " + id + " deleted.");
     }
 }
