@@ -65,6 +65,13 @@ public class BookingController {
         return ResponseEntity.status(HttpStatus.CREATED).body("Room added " + room.getRoomNumber());
     }
 
+    @PutMapping("/rooms/{id}")
+    public ResponseEntity<String> updateRoom(@PathVariable String id, @RequestBody Room room){
+        room.setId(Integer.parseInt(id));
+        roomsRepository.save(room);
+        return ResponseEntity.status(HttpStatus.OK).body("Room id: "+room.getId() + " updated.");
+    }
+
     // Delete Request
     @DeleteMapping("/rooms/{id}")
     public ResponseEntity<String> deleteRoomById(@PathVariable String id){
